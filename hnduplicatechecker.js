@@ -8,7 +8,7 @@ let hnDuplicateChecker = (function(){
 
   function getDuplicates(){
     elem.href = input.value;
-    let host = elem.host,
+    let host = elem.host, // TODO: Modify this such that host will not be empty with bare domains
       path = elem.pathname;
     if ( document.hasFocus() && host !== document.location.host ){
       request = new XMLHttpRequest();
