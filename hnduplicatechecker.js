@@ -16,7 +16,7 @@ let hnDuplicateChecker = (function(){
       request.onreadystatechange = processDuplicates;
       request.send();
     }
-  };
+  }
 
   function processDuplicates(){
     if ( request.readyState === XMLHttpRequest.DONE && request.status === 200 ){
@@ -26,7 +26,7 @@ let hnDuplicateChecker = (function(){
         inputParentTr = input.parentElement.parentElement;
         tr.id = 'duplicates';
       if ( prevDupes ){
-        prevDupes.parentElement.removeChild( prevDupes )
+        prevDupes.parentElement.removeChild( prevDupes );
       }
       for ( let i = 0; i < 2; i++ ){
         td = document.createElement( 'td' );
@@ -42,5 +42,5 @@ let hnDuplicateChecker = (function(){
       }
       inputParentTr.parentElement.insertBefore( tr, inputParentTr.nextElementSibling );
     }
-  };
+  }
 })();
