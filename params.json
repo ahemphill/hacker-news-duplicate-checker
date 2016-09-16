@@ -1,0 +1,6 @@
+{
+  "name": "Hacker News Duplicate Checker",
+  "tagline": "A user script to check for duplicate submissions on Hacker News",
+  "body": "#Hacker News Duplicate Checker\r\n\r\nThis user script utilizes the API at [https://hn.algolia.com/api](https://hn.algolia.com/api) to determine whether similar URLs have been submitted to [Hacker News](https://news.ycombinator.com/) within the past year. It is a work in progress.\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
