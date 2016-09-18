@@ -12,7 +12,7 @@ let hnDuplicateChecker = (function(){
       path = elem.pathname;
     if ( document.hasFocus() && host !== document.location.host ){
       request = new XMLHttpRequest();
-      request.open( 'GET', `https://hn.algolia.com/api/v1/search_by_date?query=${host}${path}&restrictSearchableAttributes=url&tags=(story,show_hn)&numericFilters=created_at_i>${yearAgo}` );
+      request.open( 'GET', `https://hn.algolia.com/api/v1/search_by_date?query="${host}${path}"&restrictSearchableAttributes=url&tags=(story,show_hn)&numericFilters=created_at_i>${yearAgo}` );
       request.onreadystatechange = processDuplicates;
       request.send();
     }
