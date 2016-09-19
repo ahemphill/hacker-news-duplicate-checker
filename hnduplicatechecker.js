@@ -7,12 +7,12 @@ let hnDuplicateChecker = (function(){
   input.addEventListener( 'blur', getDuplicates );
 
   function getDuplicates(){
-    elem.href = input.value;
-    let host = elem.host, // TODO: Modify this such that host will not be empty with bare domains
+    elem.href = input.value.includes( '//' ) ? input.value : '//' + input.value; // Hacky way to ensure protocol exists so elem.href is not relative to document.location.host
+    let host = elem.host,
       path = elem.pathname;
     if ( document.hasFocus() && host !== document.location.host ){
       request = new XMLHttpRequest();
-      request.open( 'GET', `https://hn.algolia.com/api/v1/search_by_date?query="${host}${path}"&restrictSearchableAttributes=url&tags=(story,show_hn)&numericFilters=created_at_i>${yearAgo}` );
+      request.open( 'GET', `https://hn.algolia.com/api/v1/search_by_date?query=${host}${path}&restrictSearchableAttributes=url&tags=(story,show_hn)&numericFilters=created_at_i>${yearAgo}&typoTolerance=false` );
       request.onreadystatechange = processDuplicates;
       request.send();
     }
