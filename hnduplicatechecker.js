@@ -68,7 +68,6 @@ let hnDuplicateChecker = (function(){
               td.innerText = 'dupes';
               break;
             case 1:
-              // TODO: Style
               ul = document.createElement( 'ul' );
               for ( let i = 0; /*hit.num_comments > 1 &&*/ i < response.nbHits; i++ ){
                 hit = response.hits[i];
