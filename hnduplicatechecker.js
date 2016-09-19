@@ -28,19 +28,34 @@ let hnDuplicateChecker = (function(){
       if ( prevDupes ){
         prevDupes.parentElement.removeChild( prevDupes );
       }
-      for ( let i = 0; i < 2; i++ ){
-        td = document.createElement( 'td' );
-        tr.appendChild( td );
-        switch ( i ) {
-          case 0:
-            td.innerText = 'dupes';
-            break;
-          case 1:
-            td.innerText = `${response.nbHits} similar URLs have been submitted in the past year`;
-            break;
+      if ( response.nbHits > 0 ){
+        for ( let i = 0; i < 2; i++ ){
+          td = document.createElement( 'td' );
+          tr.appendChild( td );
+          switch ( i ) {
+            case 0:
+              td.innerText = 'dupes';
+              break;
+            case 1:
+              // TODO: Filter on hit._highlightResult.fullyHighlighted == true, num_comments > 1; calculate timeAgo; style
+              ul = document.createElement( 'ul' );
+              for ( let i = 0; i < 5; i++ ){ // TODO: Add <5 failsafe
+                let li = document.createElement( 'li' ),
+                  a = document.createElement( 'a' ),
+                  hit = response.hits[i],
+                  timeAgo = 'someTime';
+                a.href = `item?id=${hit.objectID}`;
+                a.innerText = `${hit.title} (${hit.points} points by ${hit.author} ${timeAgo} ago | ${hit.num_comments} comments)`;
+                li.appendChild( a );
+                ul.appendChild( li );
+              }
+              td.appendChild( ul );
+              // td.innerText = `${response.nbHits} similar URLs have been submitted in the past year`;
+              break;
+          }
         }
+        inputParentTr.parentElement.insertBefore( tr, inputParentTr.nextElementSibling );
       }
-      inputParentTr.parentElement.insertBefore( tr, inputParentTr.nextElementSibling );
     }
   }
 })();

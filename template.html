@@ -11,3 +11,17 @@
   </td>
 </tr>
 <tr class="spacer" style="height:5px"></tr>
+
+
+<ul>
+  <li class="athing" id="${id}">
+    <a href="${url}" class="title storylink">${title}</a>
+    <span class="sitebit comhead">
+      (<a href="from?site=${bareHost}"><span class="sitestr">${bareHost}</span></a>)
+    </span>
+    <div class="subtext">
+      <span class="score" id="score_${id}">${points} points</span> by <a href="user?id=${author}" class="hnuser">${author}</a> <span class="age"><a href="item?id=${id}">${timeAgo} ago</a></span> | <a href="item?id=${id}">${num_comments}&nbsp;comments</a>
+    </div>
+    <div class="spacer" style="height:5px"></div>
+  </li>
+</ul>
