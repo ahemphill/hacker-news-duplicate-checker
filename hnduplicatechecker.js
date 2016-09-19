@@ -62,7 +62,7 @@ let hnDuplicateChecker = (function(){
       if ( prevDupes ){
         prevDupes.parentElement.removeChild( prevDupes );
       }
-      if ( response.nbHits > 0 && response.hits[0]._highlightResult.url.fullyHighlighted == true ){
+      if ( response.nbHits > 0 && response.hits[0]._highlightResult.url.fullyHighlighted == true ){ // TODO: Find a better mechanism for determining match (regardless of protocol AND www)
         for ( let i = 0; i < 2; i++ ){
           let td = document.createElement( 'td' );
           tr.appendChild( td );
@@ -71,18 +71,18 @@ let hnDuplicateChecker = (function(){
               td.innerText = 'dupes';
               break;
             case 1:
-              ul = document.createElement( 'ul' );
+              let ul = document.createElement( 'ul' );
               for ( let i = 0; /*hit.num_comments > 1 &&*/ i < response.nbHits; i++ ){
-                hit = response.hits[i];
+                let hit = response.hits[i];
                 if ( typeof hit != 'undefined' ){
                   let li = document.createElement( 'li' ),
-                    a = document.createElement( 'a' );
+                    a = document.createElement( 'a' ),
                     a2 = document.createElement( 'a' );
                   a.href = `item?id=${hit.objectID}`;
                   a.style.cssText = 'color: #828282;';
                   a2.href = `${hit.url}`;
-                  // TODO: strip www.
-                  a.innerText = `${hit.title} [${a2.hostname}] ( ${hit.points} points by ${hit.author} ${timeAgo( hit.created_at_i )[1]} ago | ${hit.num_comments} comments )`;
+                  let noDub = a2.hostname.replace( /^(www\.)/, '' );
+                  a.innerText = `${hit.title} [${noDub}] ( ${hit.points} points by ${hit.author} ${timeAgo( hit.created_at_i )[1]} ago | ${hit.num_comments} comments )`;
                   li.appendChild( a );
                   ul.appendChild( li );
                   ul.style.cssText = 'list-style-type: none; padding-left: 0; margin: 0;';
