@@ -1,3 +1,13 @@
+// ==UserScript==
+// @name         Hacker News Duplicate Checker
+// @namespace    http://ahemphill.net/
+// @version      0.9.0
+// @description  Check for duplicate submissions on Hacker News (https://news.ycombinator.com/)
+// @author       Adam Hemphill
+// @homepage     http://ahemphill.net/hacker-news-duplicate-checker/
+// @match        https://news.ycombinator.com/submit
+// ==/UserScript==
+
 let hnDuplicateChecker = (function(){
 
   'use strict';
