@@ -1,4 +1,7 @@
 let hnDuplicateChecker = (function(){
+
+  'use strict';
+
   let input = document.querySelector( 'input[name=url]' ),
     elem = document.createElement( 'a' ),
     secondsNow = Math.floor( Date.now() / 1000 ),
@@ -61,7 +64,7 @@ let hnDuplicateChecker = (function(){
       }
       if ( response.nbHits > 0 && response.hits[0]._highlightResult.url.fullyHighlighted == true ){
         for ( let i = 0; i < 2; i++ ){
-          td = document.createElement( 'td' );
+          let td = document.createElement( 'td' );
           tr.appendChild( td );
           switch ( i ) {
             case 0:
@@ -78,6 +81,7 @@ let hnDuplicateChecker = (function(){
                   a.href = `item?id=${hit.objectID}`;
                   a.style.cssText = 'color: #828282;';
                   a2.href = `${hit.url}`;
+                  // TODO: strip www.
                   a.innerText = `${hit.title} [${a2.hostname}] ( ${hit.points} points by ${hit.author} ${timeAgo( hit.created_at_i )[1]} ago | ${hit.num_comments} comments )`;
                   li.appendChild( a );
                   ul.appendChild( li );
