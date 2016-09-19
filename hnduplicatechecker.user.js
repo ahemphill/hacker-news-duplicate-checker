@@ -48,7 +48,7 @@ let hnDuplicateChecker = (function(){
         num = Math.floor( secondsDiff / 60 );
         break;
     }
-    phrase = ( num <=1 ? singular : num ) + ` ${unit}` + ( num > 1 ? 's' : '');
+    phrase = ( num <=1 ? 'less than ' + singular : num ) + ` ${unit}` + ( num > 1 ? 's' : ''); // 'less than a day' || '38 days'
     return [ num, phrase ];
   }
 
