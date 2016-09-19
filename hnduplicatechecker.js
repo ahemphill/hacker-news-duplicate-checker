@@ -88,8 +88,8 @@ let hnDuplicateChecker = (function(){
                   ul.style.cssText = 'list-style-type: none; padding-left: 0; margin: 0;';
                 }
               }
-              td.appendChild( ul );
-              break;
+            td.appendChild( ul );
+            break;
           }
         }
         inputParentTr.parentElement.insertBefore( tr, inputParentTr.nextElementSibling );
