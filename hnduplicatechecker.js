@@ -62,7 +62,7 @@ let hnDuplicateChecker = (function(){
       if ( prevDupes ){
         prevDupes.parentElement.removeChild( prevDupes );
       }
-      if ( response.nbHits > 0 && response.hits[0]._highlightResult.url.fullyHighlighted === true ){ // TODO: Find a better mechanism for determining match (regardless of protocol AND www)
+      if ( response.nbHits > 0 && response.hits[0]._highlightResult.url.matchLevel === 'full' ){
         for ( let i = 0; i < 2; i++ ){
           let td = document.createElement( 'td' );
           tr.appendChild( td );
