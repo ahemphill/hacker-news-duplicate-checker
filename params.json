@@ -1,6 +1,6 @@
 {
   "name": "Hacker News Duplicate Checker",
   "tagline": "A user script to check for duplicate submissions on Hacker News",
-  "body": "#Hacker News Duplicate Checker\r\n\r\nThis user script utilizes the API at [https://hn.algolia.com/api](https://hn.algolia.com/api) to determine whether similar URLs have been submitted to [Hacker News](https://news.ycombinator.com/) within the past year. It is a work in progress.\r\n",
+  "body": "# Hacker News Duplicate Checker\r\n![Hacker News Duplicate Checker screenshot][screenshot]\r\n### Functionality\r\nThis userscript queries the API at <https://hn.algolia.com/api> and displays the five most recent [similar*](#caveats-todo) URLs submitted to [Hacker News](https://news.ycombinator.com/) within the past year.\r\n\r\n### Requirements\r\n* Userscript extension (e.g. [Tampermonkey](http://tampermonkey.net/), [Greasemonkey](http://www.greasespot.net/))\r\n* ECMAScript 2015-compatible browser\r\n* Interwebs\r\n\r\n### Caveats (TODO)\r\n* Does not currently match query strings\r\n\r\n[screenshot]: hnduplicatechecker.png\r\n",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
