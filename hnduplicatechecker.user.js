@@ -103,7 +103,7 @@ let hnDuplicateChecker = (function(){
               break;
             case 1:
               let ul = document.createElement( 'ul' );
-              for ( let i = 0; /*hit.num_comments > 1 &&*/ i < response.nbHits; i++ ){
+              for ( let i = 0; /*hit.num_comments > 1 &&*/ i < response.nbHits && i < 5; i++ ){
                 let hit = response.hits[i];
                 if ( typeof hit != 'undefined' ){
                   let li = document.createElement( 'li' ),
