@@ -26,6 +26,7 @@ let hnDuplicateChecker = (function(){
       path = elem.pathname;
     if ( document.hasFocus() && host !== document.location.host ){
       request = new XMLHttpRequest();
+      // TODO: Add query string matching (e.g. http://appft.uspto.gov/netacgi/nph-Parser?Sect1=PTO1&Sect2=HITOFF&d=PG01&p=1&u=%2Fnetahtml%2FPTO%2Fsrchnum.html&r=1&f=G&l=50&s1=%2220160264304%22.PGNR.&OS=DN%2F20160264304&RS=DN%2F20160264304)
       request.open( 'GET', `https://hn.algolia.com/api/v1/search_by_date?query=${host}${path}&restrictSearchableAttributes=url&tags=(story,show_hn)&numericFilters=created_at_i>${yearAgo}&typoTolerance=false` );
       request.onreadystatechange = processDuplicates;
       request.send();
