@@ -32,34 +32,55 @@ let hnDuplicateChecker = (function(){
     }
   }
 
-  function timeAgo( secondsThen, secondsNow = Math.floor( Date.now() / 1000 ), unit = 'day' ){
-    //TODO: Return the largest unit without needing a parameter
+  function timeAgo( secondsThen, secondsNow = Math.floor( Date.now() / 1000 ) ){
     let secondsDiff = secondsNow - secondsThen,
-      num, phrase,
+      unit = 'second',
       singular = 'a';
-    switch ( unit ){
-      case 'year':
-        num = Math.floor( secondsDiff / 31540000 );
-        break;
-      case 'month':
-        num = Math.floor( secondsDiff / 2628000 );
-        break;
-      case 'week':
-        num = Math.floor( secondsDiff / 604800 );
-        break;
-      case 'day':
-        num = Math.floor( secondsDiff / 86400 );
-        break;
-      case 'hour':
-        num = Math.floor( secondsDiff / 3600 );
-        singular = 'an';
-        break;
-      case 'minute':
-        num = Math.floor( secondsDiff / 60 );
-        break;
+    if ( secondsDiff < 60 ) {
+      return phrase( secondsDiff );
     }
-    phrase = ( num <=1 ? 'less than ' + singular : num ) + ` ${unit}` + ( num > 1 ? 's' : ''); // 'less than a day' || '38 days'
-    return [ num, phrase ];
+    let minsDiff = Math.floor( secondsDiff / 60 );
+    unit = 'minute';
+    if ( minsDiff < 60 ){
+      return phrase( minsDiff );
+    }
+    let hoursDiff = Math.floor( secondsDiff / 3600 );
+    unit = 'hour';
+    if ( hoursDiff < 24 ){
+      singular = 'an';
+      return phrase( hoursDiff );
+    }
+    let daysDiff = Math.floor( secondsDiff / 86400 );
+    unit = 'day';
+    if ( daysDiff < 7 ){
+      return phrase( daysDiff );
+    }
+    let weeksDiff = Math.floor( secondsDiff / 604800 );
+    unit = 'week';
+    if ( weeksDiff < 4 ){
+      return phrase( weeksDiff );
+    }
+    let monthsDiff = Math.floor( secondsDiff / 2628000 );
+    unit = 'month';
+    if ( monthsDiff < 12 ){
+      return phrase( monthsDiff );
+    }
+    let yearsDiff = Math.floor( secondsDiff / 31540000);
+    unit = 'year';
+    return phrase( yearsDiff );
+
+    function phrase( unitDiff ){
+      let unitAgo = `${singular} ${unit} ago`;
+      if ( unitDiff < 0 ){
+        return 'the future';
+      } else if ( unitDiff < 1 ) {
+        return `less than ${unitAgo}`;
+      } else if ( unitDiff === 1 ){
+        return `${unitAgo}`;
+      } else {
+        return `${unitDiff} ${unit}s ago`;
+      }
+    }
   }
 
   function processDuplicates(){
@@ -92,7 +113,7 @@ let hnDuplicateChecker = (function(){
                   a.style.cssText = 'color: #828282;';
                   a2.href = `${hit.url}`;
                   let noDub = a2.hostname.replace( /^(www\.)/, '' );
-                  a.innerText = `${hit.title} [${noDub}] ( ${hit.points} points by ${hit.author} ${timeAgo( hit.created_at_i )[1]} ago | ${hit.num_comments} comments )`;
+                  a.innerText = `${hit.title} [${noDub}] ( ${hit.points} points by ${hit.author} ${timeAgo( hit.created_at_i )} | ${hit.num_comments} comments )`;
                   li.appendChild( a );
                   ul.appendChild( li );
                   ul.style.cssText = 'list-style-type: none; padding-left: 0; margin: 0;';
